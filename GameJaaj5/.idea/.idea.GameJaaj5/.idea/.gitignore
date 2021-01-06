@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/modules.xml
+/.idea.GameJaaj5.iml
+# Datasource local storage ignored files
+/../../../../../../:\GameJaaj5\GameJaaj5\.idea\.idea.GameJaaj5\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
