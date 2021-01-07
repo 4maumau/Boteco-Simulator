@@ -18,6 +18,7 @@ public class PlayerAnimator : MonoBehaviour
         Vector2 moveDirection = playerMovement.moveInput;
         animator.SetFloat("FaceX", moveDirection.x);
         animator.SetFloat("FaceY", moveDirection.y);
+        
         if (moveDirection != Vector2.zero)
         {
             animator.Play("Walk");
