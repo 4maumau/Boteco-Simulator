@@ -4,15 +4,50 @@ using UnityEngine;
 
 public class NpcAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Animator animator;
+    NpcBehaviour npc;
+
+    public Animator reactionsAnimator;
+
+    private void Start()
     {
-        
+        animator = GetComponent<Animator>();
+
+        npc = GetComponentInParent<NpcBehaviour>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+       switch (npc.currentState)
+        {
+            case NpcBehaviour.State.Walking:
+                animator.Play("Walk Tree");
+                animator.SetFloat("FaceX", npc.direction.x);
+                animator.SetFloat("FaceY", npc.direction.y);
+                break;
+
+            case NpcBehaviour.State.Sitting:
+                animator.Play("Sitting Tree");
+                break;
+
+            case NpcBehaviour.State.Drinking:
+                animator.Play("Sitting Tree");
+                break;
+            case NpcBehaviour.State.Waiting:
+                animator.Play("Idle Tree");
+                break;
+
+            default:
+                animator.Play("Idle Tree");
+                break;
+        }
+
+    }
+
+    public void PlayReaction(string reaction)
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        reactionsAnimator.Play(reaction);
+        print("playing reaction: " + reaction);
     }
 }
