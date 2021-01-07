@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputAction wasd;
     [SerializeField] private float moveSpeed = 5;
 
+    public Vector2 moveInput;
     private Vector2 velocity;
     private Rigidbody2D rb;
 
@@ -21,11 +22,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MovementInput();
+        
     }
 
     private void MovementInput()
     {
-        Vector2 moveInput = wasd.ReadValue<Vector2>();
+        moveInput = wasd.ReadValue<Vector2>();
         Vector2 moveVelocity = moveInput.normalized * moveSpeed;
         Move(moveVelocity);
     }
