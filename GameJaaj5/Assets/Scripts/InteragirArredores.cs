@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Compression;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteragirArredores : MonoBehaviour
 {
@@ -16,9 +17,13 @@ public class InteragirArredores : MonoBehaviour
         {
             Transform target = interactableObjects[i].transform;
             Debug.Log("Pode interagir com: " + target.gameObject.name);
-
+            if (Keyboard.current[Key.Space].wasPressedThisFrame)
+            {
+                // action interact?
+            }
         }
-
+        
+        
     }
 
     private void OnDrawGizmos()
