@@ -6,7 +6,7 @@ using Pathfinding;
 public class NpcBehaviour : MonoBehaviour
 {
     public enum State { Waiting, Walking, Sitting, Drinking };
-    State currentState;
+    public State currentState;
     
     
     public float smoothing = 0.5f;
@@ -21,12 +21,18 @@ public class NpcBehaviour : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndofPath;
 
+    public Vector2 direction;
+
+    private NpcAnimator animatorScript;
+
     void Start()
     {
         seeker = GetComponent<Seeker>();
-
         seeker.StartPath(transform.position, target.position, OnPathComplete);
+
+        animatorScript = GetComponentInChildren<NpcAnimator>();
     }
+
     
     void FixedUpdate()
     {
@@ -40,15 +46,18 @@ public class NpcBehaviour : MonoBehaviour
             print("we here");
             if (currentState != State.Sitting)
             {
-                Sitting();
+                StartCoroutine(Sitting());
             }
 
             return;
         }
-        else 
+        else
+        {
             reachedEndofPath = false;
+            currentState = State.Walking;
+        }
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
+        direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
         Vector2 moveSpeed = direction * speed * Time.deltaTime;
 
         transform.position = new Vector2(transform.position.x + moveSpeed.x, transform.position.y + moveSpeed.y);
@@ -61,20 +70,6 @@ public class NpcBehaviour : MonoBehaviour
         }
     }
 
-    IEnumerator WalkingToTable(Transform target)
-    {
-        while (Vector2.Distance(transform.position, target.position) > 0.7f)
-        {
-            currentState = State.Walking;
-            transform.position = Vector2.Lerp(transform.position, target.position, smoothing * Time.deltaTime);
-            
-
-            yield return null;
-        }
-
-        Sitting();
-    }
-
     void OnPathComplete(Path p)
     {
         if  (!p.error)
@@ -85,11 +80,15 @@ public class NpcBehaviour : MonoBehaviour
         }
     }
 
-    void Sitting()
+    IEnumerator Sitting()
     {
-        
         currentState = State.Sitting;
         transform.position = target.GetChild(0).position;
         print(currentState);
+
+        yield return new WaitForSeconds(1);
+
+        animatorScript.PlayReaction("BeerPlease");
+        print("BEER");
     }
 }
