@@ -8,11 +8,12 @@ public class NpcAnimator : MonoBehaviour
     NpcBehaviour npc;
 
     public Animator reactionsAnimator;
+    private GameObject reactionsObj;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-
+        reactionsObj = transform.GetChild(0).gameObject;
         npc = GetComponentInParent<NpcBehaviour>();
     }
 
@@ -46,8 +47,13 @@ public class NpcAnimator : MonoBehaviour
 
     public void PlayReaction(string reaction)
     {
-        transform.GetChild(0).gameObject.SetActive(true);
+        reactionsObj.SetActive(true);
         reactionsAnimator.Play(reaction);
         print("playing reaction: " + reaction);
+    }
+
+    public void StopReaction()
+    {
+        reactionsObj.SetActive(false);
     }
 }
