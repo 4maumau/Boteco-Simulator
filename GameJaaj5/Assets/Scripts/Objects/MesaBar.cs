@@ -5,7 +5,6 @@ using UnityEngine;
 public class MesaBar : HighlightInteractable
 {
     private bool _availableForTower;
-    [SerializeField] private GameObject torreDeCervejaPrefab;
     private TorreDeCerveja torreDeCervejaInstancia;
     protected override void Start()
     {
@@ -25,10 +24,12 @@ public class MesaBar : HighlightInteractable
     {
         SpriteRenderer.material = spriteDefault;
         SetAvailableForTower(false);
-        Destroy(player.GetComponentInChildren<TorreDeCerveja>().gameObject);
         PlayerActionsVar.SetHoldingTower(false);
-        torreDeCervejaInstancia = Instantiate(torreDeCervejaPrefab,transform.position, Quaternion.identity).GetComponent<TorreDeCerveja>();
-        torreDeCervejaInstancia.SetInUse(true);
+        torreDeCervejaInstancia = player.GetComponentInChildren<TorreDeCerveja>();
+        Debug.Log(torreDeCervejaInstancia.gameObject.name);
+        torreDeCervejaInstancia.gameObject.transform.position = transform.position;
+        torreDeCervejaInstancia.gameObject.transform.SetParent(null);
+        torreDeCervejaInstancia.SetMesa(this);
         StartCoroutine(TimerToFinishTower());
     }
 

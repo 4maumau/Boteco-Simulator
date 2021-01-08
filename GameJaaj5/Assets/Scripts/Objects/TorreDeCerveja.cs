@@ -36,13 +36,14 @@ public class TorreDeCerveja : HighlightInteractable
         if (mesaQueMeCriou != null)
         {
             mesaQueMeCriou.SetAvailableForTower(true);
+            mesaQueMeCriou = null;
         }
         PlayerActionsVar.SetHoldingTower(true);
         CanInteract = false;
         SpriteRenderer.material = spriteDefault;
-        GetComponent<BoxCollider2D>().enabled = false;
         transform.position = player.transform.position + (Vector3.up * 1);
         transform.SetParent(player.transform);
+        SetInUse(true);
     }
 
     //Condição para interagir: sobrando torres na mesa de torres Ou em uma mesa sem clientes.

@@ -12,6 +12,8 @@ public class PlayerActions : MonoBehaviour
         holdingTower = false;
     }
 
+    
+    
     public void SetHoldingTower(bool isHoldingTower)
     {
         holdingTower = isHoldingTower;

@@ -21,7 +21,7 @@ public abstract class HighlightInteractable : MonoBehaviour
         PlayerActionsVar = player.GetComponent<PlayerActions>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (CanInteract && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
