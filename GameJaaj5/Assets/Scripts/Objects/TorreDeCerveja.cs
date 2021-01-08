@@ -6,28 +6,39 @@ using UnityEngine;
 public class TorreDeCerveja : HighlightInteractable
 {
     private bool _inUse;
+    private bool _isFull;
 
-    private MesaBar mesaQueMeCriou;
+    [SerializeField]private Sprite fullTower;
+    [SerializeField]private Sprite emptyTower;
+    
+    private Mesa mesaQueMeCriou;
 
     private void Awake()
     {
         base.Start();
         _inUse = false;
+        _isFull = true;
         mesaQueMeCriou = null;
         GetComponent<BoxCollider2D>().enabled = true;
     }
 
-    public void SetMesa(MesaBar mesaBar)
+    public void SetMesa(Mesa mesa)
     {
-        mesaQueMeCriou = mesaBar;
+        mesaQueMeCriou = mesa;
     }
     
-
     public void SetInUse(bool inUse)
     {
         _inUse = inUse;
     }
 
+    public void SetFilled(bool isFull)
+    {
+        _isFull = isFull;
+    }
+
+    public bool IsFull() => _isFull;
+    
     public bool InUse() => _inUse;
 
     //Interagir: Pega a torre

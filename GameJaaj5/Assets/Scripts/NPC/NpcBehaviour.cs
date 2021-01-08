@@ -1,10 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
 public class NpcBehaviour : MonoBehaviour
 {
+
+    public static event Action LeavingTable;
+    public static event Action<List<MesaBar>> TableInicialization;
+
+
     public enum State { Waiting, WaitingForDrink, Walking, Sitting, Drinking };
     public State currentState;
     
@@ -15,7 +21,8 @@ public class NpcBehaviour : MonoBehaviour
 
     public float speed = 5f;
     public float nextWaypointDistance = 1f;
-
+    
+    private List<MesaBar> mesas;
 
     Seeker seeker;
     Path path;
@@ -37,7 +44,8 @@ public class NpcBehaviour : MonoBehaviour
         animatorScript = GetComponentInChildren<NpcAnimator>();
         path = seeker.StartPath(transform.position, target.position, OnPathComplete);
         StartCoroutine(GoTo(target, PlaySitting));
-        
+    
+        TableInicialization?.Invoke(mesas);
     }
 
 
@@ -66,7 +74,7 @@ public class NpcBehaviour : MonoBehaviour
             if (currentWaypoint < path.vectorPath.Count)
             {
                 direction = ((Vector2)path.vectorPath[currentWaypoint] - (Vector2)transform.position).normalized;
-                Vector2 moveSpeed = direction * speed * Time.deltaTime;
+                Vector2 moveSpeed = direction * (speed * Time.deltaTime);
                 transform.position = new Vector2(transform.position.x + moveSpeed.x, transform.position.y + moveSpeed.y);
                 float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
 
@@ -97,10 +105,10 @@ public class NpcBehaviour : MonoBehaviour
 
     void PlaySitting()
     {
-        StartCoroutine("Sitting");
+        StartCoroutine(Sitting());
     }
 
-    IEnumerator Sitting()
+    private IEnumerator Sitting()
     {
         currentState = State.Sitting;
         transform.position = target.GetChild(0).position;
@@ -116,7 +124,7 @@ public class NpcBehaviour : MonoBehaviour
         StartCoroutine(Drinking());
     }
 
-    IEnumerator Drinking()
+    private IEnumerator Drinking()
     {
         seeker.StartPath(transform.position, caixa.position, OnPathComplete);
         print("started drinking");

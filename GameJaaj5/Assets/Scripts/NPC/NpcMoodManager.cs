@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcManager : MonoBehaviour
+public class NpcMoodManager : MonoBehaviour
 {
     public enum Mood { Mad, Normal, Happy};
     public Mood currentMood;
