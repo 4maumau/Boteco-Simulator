@@ -31,6 +31,10 @@ public class NpcAnimator : MonoBehaviour
                 animator.Play("Sitting Tree");
                 break;
 
+            case NpcBehaviour.State.WaitingForDrink:
+                animator.Play("Sitting Tree");
+                break;
+
             case NpcBehaviour.State.Drinking:
                 animator.Play("Sitting Tree");
                 break;

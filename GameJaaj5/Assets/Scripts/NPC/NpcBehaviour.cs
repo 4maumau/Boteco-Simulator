@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class NpcBehaviour : MonoBehaviour
 {
-    public enum State { Waiting, Walking, Sitting, Drinking };
+    public enum State { Waiting, WaitingForDrink, Walking, Sitting, Drinking };
     public State currentState;
     
     
@@ -29,7 +29,7 @@ public class NpcBehaviour : MonoBehaviour
 
     private NpcAnimator animatorScript;
 
-    // PROBLEMA: temos que esperar o path ser achado pra começar a andar
+    
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -52,7 +52,6 @@ public class NpcBehaviour : MonoBehaviour
             {
                 hasArrived = true;
                 reachedEndofPath = true;
-                
             }
             else
             {
@@ -109,9 +108,11 @@ public class NpcBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         animatorScript.PlayReaction("BeerPlease");
+        currentState = State.WaitingForDrink;
 
         // fingir que ta com a beer agr
         yield return new WaitForSeconds(4);
+        animatorScript.PlayReaction("HappyReaction");
         StartCoroutine(Drinking());
     }
 
@@ -119,7 +120,7 @@ public class NpcBehaviour : MonoBehaviour
     {
         seeker.StartPath(transform.position, caixa.position, OnPathComplete);
         print("started drinking");
-        animatorScript.StopReaction();
+        //nimatorScript.StopReaction();
         currentState = State.Drinking;
         yield return new WaitForSeconds(6); // drinking time;
 
