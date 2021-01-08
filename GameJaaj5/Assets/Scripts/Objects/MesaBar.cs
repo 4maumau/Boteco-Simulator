@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class MesaBar : Mesa
 {
+    private bool _emptyForClients = true;
+    private bool _waitingDrink = false;
+    
+    public Action RecebeuCerveja; 
+    
     private void Awake()
     {
         NpcBehaviour.TableInicialization += AddTableToList;
@@ -14,8 +19,19 @@ public class MesaBar : Mesa
     {
         lista.Add(this);
     }
-    
-    
+
+    public bool EmptyForClients
+    {
+        get => _emptyForClients;
+        set => _emptyForClients = value;
+    }
+
+    public bool WaitingDrink
+    {
+        get => _waitingDrink;
+        set => _waitingDrink = value;
+    }
+
     //Interagir: Coloca a torre de cerveja na mesa
     protected override void Interact()
     {
@@ -24,16 +40,16 @@ public class MesaBar : Mesa
         PlayerActionsVar.SetHoldingTower(false);
         torreDeCervejaInstancia = player.GetComponentInChildren<TorreDeCerveja>();
         Debug.Log(torreDeCervejaInstancia.gameObject.name);
-        torreDeCervejaInstancia.gameObject.transform.position = transform.position;
+        torreDeCervejaInstancia.gameObject.transform.position = transform.position + Vector3.up * 0.5f;
         torreDeCervejaInstancia.gameObject.transform.SetParent(null);
         torreDeCervejaInstancia.SetMesa(this);
-        StartCoroutine(TimerToFinishTower());
+        RecebeuCerveja?.Invoke();
     }
 
-    IEnumerator TimerToFinishTower()
+    public void FinishedDrinking()
     {
-        yield return new WaitForSeconds(5);
-        Debug.Log("Terminaram de comer");
+        Debug.Log("Terminaram de beber");
+        WaitingDrink = false;
         torreDeCervejaInstancia.SetInUse(false);
         torreDeCervejaInstancia.SetFilled(false);
     }
@@ -42,6 +58,6 @@ public class MesaBar : Mesa
     protected override bool ConditionToInteract()
     {
         return IsAvailableForTower() && PlayerActionsVar.IsHoldingTower() &&
-               player.GetComponentInChildren<TorreDeCerveja>().IsFull();
+               player.GetComponentInChildren<TorreDeCerveja>().IsFull() && WaitingDrink;
     }
 }

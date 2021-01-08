@@ -315,7 +315,6 @@ Transform:
   m_LocalPosition: {x: 8.57, y: -1.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 850882804}
   - {fileID: 1313432112}
   - {fileID: 388402737}
   m_Father: {fileID: 627867915}
@@ -377,7 +376,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 265213941}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &388402738
 SpriteRenderer:
@@ -2454,6 +2453,7 @@ Transform:
   - {fileID: 265213941}
   - {fileID: 2045061058}
   - {fileID: 540718861}
+  - {fileID: 850882804}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2577,6 +2577,8 @@ GameObject:
   m_Component:
   - component: {fileID: 850882804}
   - component: {fileID: 850882805}
+  - component: {fileID: 850882807}
+  - component: {fileID: 850882806}
   m_Layer: 0
   m_Name: Chopp
   m_TagString: Interactable
@@ -2591,12 +2593,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850882803}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.7999997, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 265213941}
-  m_RootOrder: 0
+  m_Father: {fileID: 627867915}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &850882805
 SpriteRenderer:
@@ -2648,6 +2650,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &850882806
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850882803}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.125}
+    newSize: {x: 1, y: 1.125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.125}
+  m_EdgeRadius: 0
+--- !u!114 &850882807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850882803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7307cdeed8408ba629c65c5bbcae49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableMaterial: {fileID: 2100000, guid: d6d98d6e22cbbc34d9005f72dace7c2b,
+    type: 2}
+  spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  player: {fileID: 1764179557}
+  fullTower: {fileID: 0}
+  emptyTower: {fileID: 0}
 --- !u!1 &1119460041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2897,7 +2943,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 265213941}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1313432113
 SpriteRenderer:
@@ -5882,12 +5928,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1764179559}
   - component: {fileID: 1764179558}
-  - component: {fileID: 1764179562}
   - component: {fileID: 1764179560}
   - component: {fileID: 1764179561}
+  - component: {fileID: 1764179562}
+  - component: {fileID: 1764179563}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6023,11 +6070,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764179557}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65bb1706cec4374a7b3a3ff03638e0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 81d5d2707db0775419751bd8283ce7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &1764179563
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764179557}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1 &1884589478
 GameObject:
   m_ObjectHideFlags: 0
@@ -6296,6 +6359,7 @@ GameObject:
   - component: {fileID: 2045061058}
   - component: {fileID: 2045061057}
   - component: {fileID: 2045061056}
+  - component: {fileID: 2045061059}
   m_Layer: 9
   m_Name: Mesa
   m_TagString: Untagged
@@ -6320,7 +6384,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.125, y: 1.125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6368,7 +6432,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 927177990519731529, guid: 218fc7a2b09e55c4785828080fce96ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 989ffb0fd6b1bab42bc772d7db832efa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6397,6 +6461,22 @@ Transform:
   m_Father: {fileID: 627867915}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2045061059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045061055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bb105f62d047f58a8353123bbf1314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableMaterial: {fileID: 2100000, guid: d6d98d6e22cbbc34d9005f72dace7c2b,
+    type: 2}
+  spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  player: {fileID: 1764179557}
 --- !u!1 &2070378480
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Pathfinding;
 
 public class NpcBehaviour : MonoBehaviour
 {
 
-    public static event Action LeavingTable;
     public static event Action<List<MesaBar>> TableInicialization;
 
 
@@ -23,7 +23,8 @@ public class NpcBehaviour : MonoBehaviour
     public float nextWaypointDistance = 1f;
     
     private List<MesaBar> mesas;
-
+    private MesaBar _mesaBarAtual;
+    
     Seeker seeker;
     Path path;
     int currentWaypoint = 0;
@@ -43,11 +44,22 @@ public class NpcBehaviour : MonoBehaviour
         
         animatorScript = GetComponentInChildren<NpcAnimator>();
         path = seeker.StartPath(transform.position, target.position, OnPathComplete);
-        StartCoroutine(GoTo(target, PlaySitting));
-    
+        mesas = new List<MesaBar>();
         TableInicialization?.Invoke(mesas);
+        ChooseTarget();
+        StartCoroutine(GoTo(target, PlaySitting));
     }
 
+    private void ChooseTarget()
+    {
+        foreach (var mesa in mesas.Where(mesa => mesa.EmptyForClients))
+        {
+            target = mesa.GetComponentInChildren<Transform>();
+            _mesaBarAtual = mesa;
+            _mesaBarAtual.EmptyForClients = false;
+            break;
+        }
+    }
 
     IEnumerator GoTo(Transform target, OnArriveDelegate Arrived)
     {
@@ -117,13 +129,15 @@ public class NpcBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1);
         animatorScript.PlayReaction("BeerPlease");
         currentState = State.WaitingForDrink;
-
-        // fingir que ta com a beer agr
-        yield return new WaitForSeconds(4);
-        animatorScript.PlayReaction("HappyReaction");
-        StartCoroutine(Drinking());
+        _mesaBarAtual.WaitingDrink = true;
+        _mesaBarAtual.RecebeuCerveja += StartDrinking;
     }
 
+    private void StartDrinking()
+    {
+        StartCoroutine(Drinking());
+    }
+    
     private IEnumerator Drinking()
     {
         seeker.StartPath(transform.position, caixa.position, OnPathComplete);
@@ -131,7 +145,7 @@ public class NpcBehaviour : MonoBehaviour
         //nimatorScript.StopReaction();
         currentState = State.Drinking;
         yield return new WaitForSeconds(6); // drinking time;
-
+        _mesaBarAtual.FinishedDrinking();
         StartCoroutine(GoTo(caixa, NotImplemented));
     }
 
