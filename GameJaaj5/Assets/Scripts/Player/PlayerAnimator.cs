@@ -10,7 +10,6 @@ public class PlayerAnimator : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        
     }
 
     private void Update()
@@ -19,11 +18,13 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetFloat("FaceX", moveDirection.x);
         animator.SetFloat("FaceY", moveDirection.y);
         
+        //if (!holdingTower)
         if (moveDirection != Vector2.zero)
         {
             animator.Play("Walk");
         }
         else animator.Play("Idle");
+        //elif (holdingTower) animator.Play("ItemIdle");
     }
 
 }
