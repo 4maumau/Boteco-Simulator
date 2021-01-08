@@ -6,44 +6,47 @@ using UnityEngine.InputSystem;
 
 public abstract class HighlightInteractable : MonoBehaviour
 {
-    protected SpriteRenderer _spriteRenderer;
-    protected bool _canInteract;
+    protected SpriteRenderer SpriteRenderer;
+    protected bool CanInteract;
+    protected PlayerActions PlayerActionsVar;
     
     [SerializeField] private Material interactableMaterial;
     [SerializeField] protected Material spriteDefault;
     [SerializeField] protected GameObject player;
     
-    private void Start()
+    protected virtual void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _canInteract = false;
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+        CanInteract = false;
+        PlayerActionsVar = player.GetComponent<PlayerActions>();
     }
 
     private void Update()
     {
-        if (_canInteract && Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (CanInteract && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             Interact();
         }
     }
 
     protected abstract void Interact();
+    protected abstract bool ConditionToInteract();
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player") || !ConditionToInteract()) return;
 
         player = other.gameObject;
-        _spriteRenderer.material = interactableMaterial;
-        _canInteract = true;
+        SpriteRenderer.material = interactableMaterial;
+        CanInteract = true;
     }
     
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
         
-        _spriteRenderer.material = spriteDefault;
-        _canInteract = false;
+        SpriteRenderer.material = spriteDefault;
+        CanInteract = false;
     }
     
 }

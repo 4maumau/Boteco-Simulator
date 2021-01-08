@@ -1,15 +1,53 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TorreDeCerveja : HighlightInteractable
 {
+    private bool _inUse;
+
+    private MesaBar mesaQueMeCriou;
+
+    private void Awake()
+    {
+        base.Start();
+        _inUse = false;
+        mesaQueMeCriou = null;
+        GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    public void SetMesa(MesaBar mesaBar)
+    {
+        mesaQueMeCriou = mesaBar;
+    }
+    
+
+    public void SetInUse(bool inUse)
+    {
+        _inUse = inUse;
+    }
+
+    public bool InUse() => _inUse;
+
+    //Interagir: Pega a torre
     protected override void Interact()
     {
-        _canInteract = false;
-        _spriteRenderer.material = spriteDefault;
+        if (mesaQueMeCriou != null)
+        {
+            mesaQueMeCriou.SetAvailableForTower(true);
+        }
+        PlayerActionsVar.SetHoldingTower(true);
+        CanInteract = false;
+        SpriteRenderer.material = spriteDefault;
         GetComponent<BoxCollider2D>().enabled = false;
         transform.position = player.transform.position + (Vector3.up * 1);
         transform.SetParent(player.transform);
+    }
+
+    //Condição para interagir: sobrando torres na mesa de torres Ou em uma mesa sem clientes.
+    protected override bool ConditionToInteract()
+    {
+        return !InUse() && !PlayerActionsVar.IsHoldingTower();
     }
 }
