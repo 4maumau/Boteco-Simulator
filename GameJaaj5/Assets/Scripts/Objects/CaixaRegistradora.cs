@@ -1,23 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CaixaRegistradora : HighlightInteractable
 {
-    private Queue<int> clientesAguardando;
+    private static Queue<NpcBehaviour> clientesAguardando;
 
     protected override void Start()
     {
         base.Start();
-        clientesAguardando = new Queue<int>();
-    } 
-    
+        clientesAguardando = new Queue<NpcBehaviour>();
+    }
 
+    public static void WaitInLine(NpcBehaviour npc)
+    {
+        clientesAguardando.Enqueue(npc);
+    }
+    
     //Interagir: Recolher dinheiro de clientes que aguardam.
     protected override void Interact()
     {
-        int clienteAtendido = clientesAguardando.Dequeue();
-        throw new System.NotImplementedException();
+        SpriteRenderer.material = spriteDefault;
+        var clienteAtendido = clientesAguardando.Dequeue();
+        clienteAtendido.FinishPayment();
     }
 
     

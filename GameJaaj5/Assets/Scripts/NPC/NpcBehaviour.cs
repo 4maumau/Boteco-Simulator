@@ -10,7 +10,6 @@ public class NpcBehaviour : MonoBehaviour
 
     public static event Action<List<MesaBar>> TableInicialization;
 
-
     public enum State { Waiting, WaitingForDrink, Walking, Sitting, Drinking, WaitingForPayment };
     public State currentState;
     
@@ -146,12 +145,18 @@ public class NpcBehaviour : MonoBehaviour
         currentState = State.Drinking;
         yield return new WaitForSeconds(6); // drinking time;
         _mesaBarAtual.FinishedDrinking();
-        StartCoroutine(GoTo(caixa, NotImplemented));
+        StartCoroutine(GoTo(caixa, RequestPayment));
     }
 
-    void NotImplemented()
+    void RequestPayment()
     {
         currentState = State.WaitingForPayment;
-        print("pagar");
+        CaixaRegistradora.WaitInLine(this);
+        print("Esperando pagamento");
+    }
+
+    public void FinishPayment()
+    {
+        print("Pagou");
     }
 }

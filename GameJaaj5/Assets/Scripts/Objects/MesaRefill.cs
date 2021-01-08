@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MesaRefill : Mesa
 {
-    public static event Action<MesaBar> OnTowerPlaced;
     
     protected override void Interact()
     {
