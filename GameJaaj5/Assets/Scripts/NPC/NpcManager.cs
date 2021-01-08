@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcMoodManager : MonoBehaviour
+public class NpcManager : MonoBehaviour
 {
     public enum Mood { Mad, Normal, Happy};
     public Mood currentMood;
@@ -16,7 +16,7 @@ public class NpcMoodManager : MonoBehaviour
     private void Start()
     {
         npc = GetComponent<NpcBehaviour>();
-        animator = GetComponentInChildren<NpcAnimator>();
+        animator = GetComponent<NpcAnimator>();
     }
 
     private void Update()
@@ -28,6 +28,8 @@ public class NpcMoodManager : MonoBehaviour
         if(running) waitingTimer -= Time.deltaTime;
 
         SetMood();
+
+        
         
     }
 
@@ -44,11 +46,10 @@ public class NpcMoodManager : MonoBehaviour
         else currentMood = Mood.Mad;
     }
 
-    public void FeedbackReaction()
+    void FeedbackReaction()
     {
         switch (currentMood)
         {
-
             case Mood.Happy:
                 animator.PlayReaction("HappyReaction");
                 break;
