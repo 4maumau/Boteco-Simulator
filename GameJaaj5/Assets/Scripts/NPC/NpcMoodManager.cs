@@ -16,7 +16,7 @@ public class NpcMoodManager : MonoBehaviour
     private void Start()
     {
         npc = GetComponent<NpcBehaviour>();
-        animator = GetComponent<NpcAnimator>();
+        animator = GetComponentInChildren<NpcAnimator>();
     }
 
     private void Update()
@@ -44,7 +44,7 @@ public class NpcMoodManager : MonoBehaviour
         else currentMood = Mood.Mad;
     }
 
-    void FeedbackReaction()
+    public void FeedbackReaction()
     {
         switch (currentMood)
         {

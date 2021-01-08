@@ -33,15 +33,17 @@ public class NpcBehaviour : MonoBehaviour
     public delegate void OnArriveDelegate();
 
 
-
+    private NpcMoodManager moodManager;
     private NpcAnimator animatorScript;
 
     
     void Start()
     {
         seeker = GetComponent<Seeker>();
-        
+
+        moodManager = GetComponent<NpcMoodManager>();
         animatorScript = GetComponentInChildren<NpcAnimator>();
+
         path = seeker.StartPath(transform.position, target.position, OnPathComplete);
         mesas = new List<MesaBar>();
         TableInicialization?.Invoke(mesas);
@@ -139,6 +141,7 @@ public class NpcBehaviour : MonoBehaviour
     
     private IEnumerator Drinking()
     {
+        moodManager.FeedbackReaction();
         seeker.StartPath(transform.position, caixa.position, OnPathComplete);
         print("started drinking");
         //nimatorScript.StopReaction();
