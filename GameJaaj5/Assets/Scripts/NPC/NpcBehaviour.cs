@@ -11,7 +11,7 @@ public class NpcBehaviour : MonoBehaviour
     public static event Action<List<MesaBar>> TableInicialization;
 
 
-    public enum State { Waiting, WaitingForDrink, Walking, Sitting, Drinking };
+    public enum State { Waiting, WaitingForDrink, Walking, Sitting, Drinking, WaitingForPayment };
     public State currentState;
     
     
@@ -123,7 +123,7 @@ public class NpcBehaviour : MonoBehaviour
     private IEnumerator Sitting()
     {
         currentState = State.Sitting;
-        transform.position = target.GetChild(0).position;
+        transform.position = target.GetChild(0).GetChild(0).position;
         print(currentState);
 
         yield return new WaitForSeconds(1);
@@ -151,6 +151,7 @@ public class NpcBehaviour : MonoBehaviour
 
     void NotImplemented()
     {
+        currentState = State.WaitingForPayment;
         print("pagar");
     }
 }
