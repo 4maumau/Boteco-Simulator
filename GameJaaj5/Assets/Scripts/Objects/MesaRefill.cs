@@ -25,6 +25,8 @@ public class MesaRefill : Mesa
 
         torreDeCervejaInstancia.PlayRefilAnimation();
         _refilling = true;
+        _refilAmount = 0;
+
     }
 
     protected override void OnTriggerStay2D(Collider2D other)
