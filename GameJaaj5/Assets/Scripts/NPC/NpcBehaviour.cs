@@ -203,7 +203,7 @@ public class NpcBehaviour : MonoBehaviour
 
     private void DoNothing()
     {
-        
+        currentState = State.Waiting;
     }
     
     public void FinishPayment()
