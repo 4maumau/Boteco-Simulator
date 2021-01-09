@@ -5,16 +5,15 @@ using UnityEngine;
 public class MoneyPopup : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
-    void Awake()
+    [SerializeField] private float destroyTime = 3f;
+
+    
+
+    private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.sortingLayerName = "UI";
         print("sorting layer:" + meshRenderer.sortingLayerName);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Destroy(gameObject, destroyTime);
     }
 }

@@ -12,6 +12,9 @@ public class NpcMoodManager : MonoBehaviour
 
     public float waitingTimer = 60f;
 
+    private int payment;
+    [SerializeField] private GameObject moneyPopupPrefab;
+
     [SerializeField] AudioClip[] audioClips;
     AudioSource audioSource;
 
@@ -71,5 +74,35 @@ public class NpcMoodManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void MoneyPopup()
+    {
+        string moneyInt;
+        Color moneyTextColor;
+        switch (currentMood)
+        {
+            case Mood.Happy:
+                moneyTextColor = Color.green;
+                moneyInt = "$25";
+                break;
+            case Mood.Normal:
+                moneyTextColor = Color.yellow;
+                moneyInt = "$20";
+                break;
+            case Mood.Mad:
+                moneyTextColor = Color.red;
+                moneyInt = "S15";
+                break;
+            default:
+                moneyTextColor = Color.white;
+                moneyInt = "sometin wrong";
+                break;
+        }
+        GameObject moneyPopup = Instantiate(moneyPopupPrefab, transform.position, Quaternion.identity);
+        TextMesh textMesh = moneyPopup.GetComponent<TextMesh>();
+        textMesh.color = moneyTextColor;
+        textMesh.text = moneyInt;
+        print("estou sendo chamado");
     }
 }

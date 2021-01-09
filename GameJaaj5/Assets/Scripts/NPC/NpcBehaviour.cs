@@ -179,7 +179,6 @@ public class NpcBehaviour : MonoBehaviour
         
         print("started drinking");
         
-        //nimatorScript.StopReaction();
         currentState = State.Drinking;
         yield return new WaitForSeconds(6); // drinking time;
         _mesaBarAtual.FinishedDrinking();
@@ -214,6 +213,7 @@ public class NpcBehaviour : MonoBehaviour
     {
         path = seeker.StartPath(transform.position, exit.position, OnPathComplete);
         moodManager.FeedbackReaction();
+        moodManager.MoneyPopup();
         print("Pagou");
         StartCoroutine(GoTo(SelfDestroy));
     }
