@@ -23,6 +23,7 @@ public class NpcBehaviour : MonoBehaviour
     private List<MesaBar> mesas;
     private MesaBar _mesaBarAtual;
     private Transform _target;
+    public Transform exit;
 
     Seeker seeker;
     Path path;
@@ -150,10 +151,12 @@ public class NpcBehaviour : MonoBehaviour
         yield return new WaitForSeconds(6); // drinking time;
         _mesaBarAtual.FinishedDrinking();
         StartCoroutine(GoTo(caixa, RequestPayment));
+        
     }
 
     void RequestPayment()
     {
+        seeker.StartPath(transform.position, exit.position, OnPathComplete);
         currentState = State.WaitingForPayment;
         CaixaRegistradora.WaitInLine(this);
         print("Esperando pagamento");
@@ -161,7 +164,13 @@ public class NpcBehaviour : MonoBehaviour
 
     public void FinishPayment()
     {
+        moodManager.FeedbackReaction();
         print("Pagou");
+        StartCoroutine(GoTo(exit, SelfDestroy));
+    }
+
+    public void SelfDestroy()
+    {
         Destroy(gameObject);
     }
 }
