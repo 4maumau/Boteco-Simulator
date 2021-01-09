@@ -8,9 +8,9 @@ public class MesaRefill : Mesa
 {
 
     private const float FullRefilGoal = 100;
-    private float _refilAmount = 0;
+    public float _refilAmount = 0;
     private float _refilStep = 0.6f;
-    private bool _refilling;
+    public bool _refilling;
     private bool _isNear;
     protected override void Interact()
     {
