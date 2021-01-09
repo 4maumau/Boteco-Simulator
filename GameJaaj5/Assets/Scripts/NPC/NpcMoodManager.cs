@@ -11,12 +11,16 @@ public class NpcMoodManager : MonoBehaviour
     private NpcAnimator animator;
 
     public float waitingTimer = 60f;
-    
-    public bool running;
+
+    [SerializeField] AudioClip[] audioClips;
+    AudioSource audioSource;
+
     private void Start()
     {
         npc = GetComponent<NpcBehaviour>();
         animator = GetComponentInChildren<NpcAnimator>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -25,7 +29,6 @@ public class NpcMoodManager : MonoBehaviour
         {
             waitingTimer -= Time.deltaTime;
         }
-        if(running) waitingTimer -= Time.deltaTime;
 
         SetMood();
         
@@ -51,12 +54,18 @@ public class NpcMoodManager : MonoBehaviour
 
             case Mood.Happy:
                 animator.PlayReaction("HappyReaction");
+                audioSource.clip = audioClips[0];
+                audioSource.Play();
                 break;
             case Mood.Normal:
                 animator.PlayReaction("NormalReaction");
+                audioSource.clip = audioClips[1];
+                audioSource.Play();
                 break;
             case Mood.Mad:
                 animator.PlayReaction("MadReaction");
+                audioSource.clip = audioClips[2];
+                audioSource.Play();
                 break;
             default:
                 break;

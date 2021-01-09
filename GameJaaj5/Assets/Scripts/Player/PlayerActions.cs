@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
 
-    private bool holdingTower;
+    public bool holdingTower;
     // Start is called before the first frame update
     void Start()
     {
