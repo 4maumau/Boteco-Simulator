@@ -22,7 +22,6 @@ public class Fila : MonoBehaviour
     private void UpdateSpaces()
     {
         var array = freeSpaces.ToArray();
-        Debug.Log(array.Length);
         for (int i = 0; i < array.Length; i++)
         {
             Debug.Log(gameObject.transform.GetChild(i).name);
@@ -46,8 +45,13 @@ public class Fila : MonoBehaviour
         {
             mesaLiberada.EmptyForClients = true;
         }
-        
-        
+    }
+
+    public void PagamentoRealizado()
+    {
+        if (freeSpaces.Count <= 0) return;
+        freeSpaces.Dequeue();
+        UpdateSpaces();
     }
 
 

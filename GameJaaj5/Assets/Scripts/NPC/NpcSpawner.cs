@@ -27,7 +27,7 @@ public class NpcSpawner : MonoBehaviour
 
             var npc = Instantiate(npcPrefab, transform.position, Quaternion.identity);
             var behaviour = npc.GetComponent<NpcBehaviour>();
-            behaviour.fila = fila;
+            behaviour.filaEntrada = fila;
             behaviour.caixa = caixa;
             behaviour.exit = transform;
             

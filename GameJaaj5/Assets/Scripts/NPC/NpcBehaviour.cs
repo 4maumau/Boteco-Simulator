@@ -20,7 +20,9 @@ public class NpcBehaviour : MonoBehaviour
     public float speed = 5f;
     public float nextWaypointDistance = 1f;
 
-    public Fila fila;
+    public Fila filaEntrada;
+    public Fila filaPagamento;
+
         
     private List<MesaBar> mesas;
     private MesaBar _mesaBarAtual;
@@ -70,7 +72,7 @@ public class NpcBehaviour : MonoBehaviour
 
     private void WaitInLine()
     {
-        var pos = fila.GetComponent<Fila>().EnqueueClient(this);
+        var pos = filaEntrada.EnqueueClient(this);
         path = seeker.StartPath(transform.position, pos.position, OnPathComplete);
         StartCoroutine(GoTo(DoNothing));
     }
@@ -174,14 +176,15 @@ public class NpcBehaviour : MonoBehaviour
     
     private IEnumerator Drinking()
     {
-        moodManager.FeedbackReaction();
-        seeker.StartPath(transform.position, caixa.position, OnPathComplete);
+        moodManager.FeedbackReaction();        
+        var pos = filaPagamento.EnqueueClient(this);
+        seeker.StartPath(transform.position, pos.position, OnPathComplete);
         print("started drinking");
         //nimatorScript.StopReaction();
         currentState = State.Drinking;
         yield return new WaitForSeconds(6); // drinking time;
         _mesaBarAtual.FinishedDrinking();
-        fila.LiberouMesa(_mesaBarAtual);
+        filaEntrada.LiberouMesa(_mesaBarAtual);
         _mesaBarAtual = null;
         StartCoroutine(GoTo(RequestPayment));
         

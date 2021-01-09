@@ -7,6 +7,7 @@ public class CaixaRegistradora : HighlightInteractable
 {
     private static Queue<NpcBehaviour> clientesAguardando;
 
+    public Fila filaPagamento;
     protected override void Start()
     {
         base.Start();
@@ -24,6 +25,7 @@ public class CaixaRegistradora : HighlightInteractable
         SpriteRenderer.material = spriteDefault;
         var clienteAtendido = clientesAguardando.Dequeue();
         clienteAtendido.FinishPayment();
+        filaPagamento.PagamentoRealizado();
     }
 
     
