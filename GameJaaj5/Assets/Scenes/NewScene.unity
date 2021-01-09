@@ -445,7 +445,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.125}
+    oldSize: {x: 0.75, y: 1.125}
     newSize: {x: 1, y: 1.125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2468,6 +2468,7 @@ GameObject:
   - component: {fileID: 757173582}
   - component: {fileID: 757173581}
   - component: {fileID: 757173580}
+  - component: {fileID: 757173583}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -2489,7 +2490,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   smoothing: 0.5
-  target: {fileID: 1119460042}
   caixa: {fileID: 540718861}
   speed: 3
   nextWaypointDistance: 1
@@ -2537,6 +2537,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &757173583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757173579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b157b4b03d04143abec6cdf697d7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMood: 0
+  waitingTimer: 60
+  audioClips: []
 --- !u!1 &799980943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,7 +2682,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.125}
+    oldSize: {x: 0.75, y: 1.125}
     newSize: {x: 1, y: 1.125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6075,6 +6090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d5d2707db0775419751bd8283ce7be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdingTower: 0
 --- !u!58 &1764179563
 CircleCollider2D:
   m_ObjectHideFlags: 0
