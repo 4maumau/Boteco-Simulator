@@ -19,7 +19,9 @@ public class NpcBehaviour : MonoBehaviour
 
     public float speed = 5f;
     public float nextWaypointDistance = 1f;
-    
+
+    [SerializeField] private GameObject filaGameObject;
+        
     private List<MesaBar> mesas;
     private MesaBar _mesaBarAtual;
     private Transform _target;
@@ -49,8 +51,7 @@ public class NpcBehaviour : MonoBehaviour
         TableInicialization?.Invoke(mesas);
         ChooseTarget();
         
-        path = seeker.StartPath(transform.position, _target.position, OnPathComplete);
-        StartCoroutine(GoTo(_target, PlaySitting));
+        
     }
 
     private void ChooseTarget()
@@ -60,11 +61,34 @@ public class NpcBehaviour : MonoBehaviour
             _target = mesa.GetComponentInChildren<Transform>();
             _mesaBarAtual = mesa;
             _mesaBarAtual.EmptyForClients = false;
-            break;
+            path = seeker.StartPath(transform.position, _target.position, OnPathComplete);
+            StartCoroutine(GoTo(PlaySitting));
+            return;
         }
+        
+        WaitInLine();
     }
 
-    IEnumerator GoTo(Transform target, OnArriveDelegate Arrived)
+    private void WaitInLine()
+    {
+        var pos = filaGameObject.GetComponent<Fila>().EnqueueClient(this);
+        path = seeker.StartPath(transform.position, pos.position, OnPathComplete);
+        StartCoroutine(GoTo(PlaySitting));
+    }
+
+    public void MoveInLine(Transform newTarget)
+    {
+        path = seeker.StartPath(transform.position, newTarget.position, OnPathComplete);
+        StartCoroutine(GoTo(PlaySitting));
+    }
+
+    public void OffTheLine()
+    {
+        path = seeker.StartPath(transform.position, _target.position, OnPathComplete);
+        StartCoroutine(GoTo(PlaySitting));
+    }
+
+    IEnumerator GoTo(OnArriveDelegate Arrived)
     {
         while (!path.IsDone()) yield return null;
         bool hasArrived = false;
@@ -150,7 +174,7 @@ public class NpcBehaviour : MonoBehaviour
         currentState = State.Drinking;
         yield return new WaitForSeconds(6); // drinking time;
         _mesaBarAtual.FinishedDrinking();
-        StartCoroutine(GoTo(caixa, RequestPayment));
+        StartCoroutine(GoTo(RequestPayment));
         
     }
 
@@ -166,7 +190,7 @@ public class NpcBehaviour : MonoBehaviour
     {
         moodManager.FeedbackReaction();
         print("Pagou");
-        StartCoroutine(GoTo(exit, SelfDestroy));
+        StartCoroutine(GoTo(SelfDestroy));
     }
 
     public void SelfDestroy()
