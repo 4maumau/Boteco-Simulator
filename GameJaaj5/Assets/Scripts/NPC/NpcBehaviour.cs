@@ -73,7 +73,7 @@ public class NpcBehaviour : MonoBehaviour
     {
         var pos = filaGameObject.GetComponent<Fila>().EnqueueClient(this);
         path = seeker.StartPath(transform.position, pos.position, OnPathComplete);
-        StartCoroutine(GoTo(PlaySitting));
+        //StartCoroutine(GoTo(PlaySitting));
     }
 
     public void MoveInLine(Transform newTarget)
