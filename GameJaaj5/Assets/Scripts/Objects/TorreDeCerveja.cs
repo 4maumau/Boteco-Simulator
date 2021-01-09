@@ -10,7 +10,9 @@ public class TorreDeCerveja : HighlightInteractable
 
     [SerializeField]private Sprite fullTower;
     [SerializeField]private Sprite emptyTower;
-    
+
+    private TorreAnimator torreAnimator;
+
     private Mesa mesaQueMeCriou;
 
     private void Awake()
@@ -20,6 +22,7 @@ public class TorreDeCerveja : HighlightInteractable
         _isFull = true;
         mesaQueMeCriou = null;
         GetComponent<BoxCollider2D>().enabled = true;
+        torreAnimator = GetComponent<TorreAnimator>();
     }
 
     public void SetMesa(Mesa mesa)
@@ -61,5 +64,10 @@ public class TorreDeCerveja : HighlightInteractable
     protected override bool ConditionToInteract()
     {
         return !InUse() && !PlayerActionsVar.IsHoldingTower();
+    }
+
+    public void StartDrinking()
+    {
+        torreAnimator.PlayDrinking();
     }
 }

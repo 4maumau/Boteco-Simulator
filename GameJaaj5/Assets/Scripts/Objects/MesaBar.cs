@@ -43,6 +43,7 @@ public class MesaBar : Mesa
         torreDeCervejaInstancia.gameObject.transform.position = transform.position + Vector3.up * 0.5f;
         torreDeCervejaInstancia.gameObject.transform.SetParent(null);
         torreDeCervejaInstancia.SetMesa(this);
+        torreDeCervejaInstancia.StartDrinking();
         RecebeuCerveja?.Invoke();
     }
 
