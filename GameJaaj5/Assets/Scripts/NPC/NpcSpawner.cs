@@ -8,6 +8,7 @@ public class NpcSpawner : MonoBehaviour
 
     [SerializeField] private GameObject npcPrefab;
     [SerializeField] private Fila fila;
+    [SerializeField] private Fila filaPagamento;
     [SerializeField] private Transform caixa;
     
     
@@ -28,6 +29,7 @@ public class NpcSpawner : MonoBehaviour
             var npc = Instantiate(npcPrefab, transform.position, Quaternion.identity);
             var behaviour = npc.GetComponent<NpcBehaviour>();
             behaviour.filaEntrada = fila;
+            behaviour.filaPagamento = filaPagamento;
             behaviour.caixa = caixa;
             behaviour.exit = transform;
             

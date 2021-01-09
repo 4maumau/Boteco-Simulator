@@ -19,13 +19,21 @@ public class Fila : MonoBehaviour
         return gameObject.transform.GetChild(freeSpaces.Count - 1).GetComponent<Transform>();
     }
     
-    private void UpdateSpaces()
+    private void UpdateSpacesEntrada()
     {
         var array = freeSpaces.ToArray();
         for (int i = 0; i < array.Length; i++)
         {
-            Debug.Log(gameObject.transform.GetChild(i).name);
             array[i].MoveInLine(gameObject.transform.GetChild(i).GetComponent<Transform>());
+        }
+    }
+    
+    private void UpdateSpacesPagamento()
+    {
+        var array = freeSpaces.ToArray();
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i].MoveInPaymentLine(gameObject.transform.GetChild(i).GetComponent<Transform>());
         }
     }
 
@@ -39,7 +47,7 @@ public class Fila : MonoBehaviour
         if (freeSpaces.Count > 0)
         {
             freeSpaces.Dequeue().OffTheLine(mesaLiberada);
-            UpdateSpaces();
+            UpdateSpacesEntrada();
         }
         else
         {
@@ -51,7 +59,7 @@ public class Fila : MonoBehaviour
     {
         if (freeSpaces.Count <= 0) return;
         freeSpaces.Dequeue();
-        UpdateSpaces();
+        UpdateSpacesPagamento();
     }
 
 

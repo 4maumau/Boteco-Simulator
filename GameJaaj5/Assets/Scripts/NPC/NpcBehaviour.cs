@@ -34,7 +34,6 @@ public class NpcBehaviour : MonoBehaviour
     Seeker seeker;
     Path path;
     int currentWaypoint = 0;
-    bool reachedEndofPath;
 
     public Vector2 direction;
     public delegate void OnArriveDelegate();
@@ -75,21 +74,22 @@ public class NpcBehaviour : MonoBehaviour
 
     private void WaitInLine()
     {
-
         var pos = filaEntrada.EnqueueClient(this);
-
         path = seeker.StartPath(transform.position, pos.position, OnPathComplete);
-        StartCoroutine(GoTo(PlaySitting));
+        StartCoroutine(GoTo(DoNothing));
     }
 
     public void MoveInLine(Transform newTarget)
     {
         path = seeker.StartPath(transform.position, newTarget.position, OnPathComplete);
-        StartCoroutine(GoTo(PlaySitting));
+        StartCoroutine(GoTo(DoNothing));
     }
 
-    public void OffTheLine()
+    public void OffTheLine(MesaBar newMesa)
     {
+        _target = newMesa.GetComponentInChildren<Transform>();
+        _mesaBarAtual = newMesa;
+        _mesaBarAtual.EmptyForClients = false;
         path = seeker.StartPath(transform.position, _target.position, OnPathComplete);
         StartCoroutine(GoTo(PlaySitting));
     }
@@ -104,11 +104,9 @@ public class NpcBehaviour : MonoBehaviour
             if (currentWaypoint >= path.vectorPath.Count)
             {
                 hasArrived = true;
-                reachedEndofPath = true;
             }
             else
             {
-                reachedEndofPath = false;
                 currentState = State.Walking;
             }
         }
@@ -167,33 +165,50 @@ public class NpcBehaviour : MonoBehaviour
 
     private void StartDrinking()
     {
+        _mesaBarAtual.RecebeuCerveja -= StartDrinking;
         StartCoroutine(Drinking());
     }
     
     private IEnumerator Drinking()
     {
         moodManager.FeedbackReaction();        
-        var pos = filaPagamento.EnqueueClient(this);
-        seeker.StartPath(transform.position, pos.position, OnPathComplete);
+        
         print("started drinking");
+        
         //nimatorScript.StopReaction();
         currentState = State.Drinking;
         yield return new WaitForSeconds(6); // drinking time;
         _mesaBarAtual.FinishedDrinking();
         filaEntrada.LiberouMesa(_mesaBarAtual);
         _mesaBarAtual = null;
+
+        StartCoroutine(GoTo(MoveToLine));
     }
 
-    void RequestPayment()
+    private void MoveToLine()
     {
-        seeker.StartPath(transform.position, exit.position, OnPathComplete);
+        var pos = filaPagamento.EnqueueClient(this);
+        path = seeker.StartPath(transform.position, pos.position, OnPathComplete);
+
         currentState = State.WaitingForPayment;
         CaixaRegistradora.WaitInLine(this);
-        print("Esperando pagamento");
+        StartCoroutine(GoTo(DoNothing));
+    }
+    
+    public void MoveInPaymentLine(Transform newTarget)
+    {
+        path = seeker.StartPath(transform.position, newTarget.position, OnPathComplete);
+        StartCoroutine(GoTo(DoNothing));
     }
 
+    private void DoNothing()
+    {
+        
+    }
+    
     public void FinishPayment()
     {
+        path = seeker.StartPath(transform.position, exit.position, OnPathComplete);
         moodManager.FeedbackReaction();
         print("Pagou");
         StartCoroutine(GoTo(SelfDestroy));
