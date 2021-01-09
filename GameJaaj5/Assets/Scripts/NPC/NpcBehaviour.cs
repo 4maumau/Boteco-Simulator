@@ -78,6 +78,7 @@ public class NpcBehaviour : MonoBehaviour
     private void DoNothing()
     {
         
+
     }
 
     public void MoveInLine(Transform newTarget)
