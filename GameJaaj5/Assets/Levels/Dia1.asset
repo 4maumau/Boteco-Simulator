@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc5d7c8a11d5504abb02d023151ec28, type: 3}
   m_Name: Dia1
   m_EditorClassIdentifier: 
-  delayBetweenSpawn: 0000000008000000080000000800000008000000
+  delayBetweenSpawn: 010000000900000009000000

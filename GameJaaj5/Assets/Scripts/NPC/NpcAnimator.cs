@@ -53,7 +53,6 @@ public class NpcAnimator : MonoBehaviour
     {
         reactionsObj.SetActive(true);
         reactionsAnimator.Play(reaction, -1, 0f);
-        print("playing reaction: " + reaction);
     }
 
     public void StopReaction()

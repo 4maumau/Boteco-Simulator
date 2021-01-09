@@ -40,7 +40,6 @@ public class MesaBar : Mesa
         SetAvailableForTower(false);
         PlayerActionsVar.SetHoldingTower(false);
         torreDeCervejaInstancia = player.GetComponentInChildren<TorreDeCerveja>();
-        Debug.Log(torreDeCervejaInstancia.gameObject.name);
         torreDeCervejaInstancia.gameObject.transform.position = transform.position + Vector3.up * 0.5f;
         torreDeCervejaInstancia.gameObject.transform.SetParent(null);
         torreDeCervejaInstancia.SetMesa(this);
