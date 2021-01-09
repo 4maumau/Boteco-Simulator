@@ -25,12 +25,13 @@ public class NpcMoodManager : MonoBehaviour
 
     private void Update()
     {
-        if(npc.currentState == NpcBehaviour.State.Waiting || npc.currentState == NpcBehaviour.State.WaitingForDrink)
+        if(npc.currentState == NpcBehaviour.State.Waiting || npc.currentState == NpcBehaviour.State.WaitingForDrink || npc.currentState == NpcBehaviour.State.WaitingForPayment)
         {
             waitingTimer -= Time.deltaTime;
         }
 
         SetMood();
+        
         
     }
 
@@ -70,5 +71,5 @@ public class NpcMoodManager : MonoBehaviour
             default:
                 break;
         }
-    }
+    } 
 }
