@@ -28,7 +28,7 @@ public class NpcSpawner : MonoBehaviour
     IEnumerator Spawner()
     {
         var count = 0;
-        while (_spawnDelayDays.Count >=  count)
+        while (_spawnDelayDays.Count >  count)
         {
             yield return new WaitForSeconds(_spawnDelayDays[count++]);
             if (fila.Count() >= 4) continue;

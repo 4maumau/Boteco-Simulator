@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dc5d7c8a11d5504abb02d023151ec28, type: 3}
-  m_Name: DIaUm
+  m_Name: Dia5
   m_EditorClassIdentifier: 
-  delayBetweenSpawn: 03000000050000000700000002000000060000000200000003000000050000000400000006000000
+  delayBetweenSpawn: 
