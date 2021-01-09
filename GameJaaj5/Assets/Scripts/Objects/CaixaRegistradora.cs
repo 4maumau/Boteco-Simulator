@@ -27,6 +27,7 @@ public class CaixaRegistradora : HighlightInteractable
     }
 
     
+    
     //Condição para interagir: Clientes esperando no caixa
     protected override bool ConditionToInteract()
     {

@@ -9,6 +9,8 @@ public abstract class HighlightInteractable : MonoBehaviour
     protected SpriteRenderer SpriteRenderer;
     protected bool CanInteract;
     protected PlayerActions PlayerActionsVar;
+
+    private static bool _canOthersInteract;
     
     [SerializeField] private Material interactableMaterial;
     [SerializeField] protected Material spriteDefault;
@@ -19,6 +21,7 @@ public abstract class HighlightInteractable : MonoBehaviour
         SpriteRenderer = GetComponent<SpriteRenderer>();
         CanInteract = false;
         PlayerActionsVar = player.GetComponent<PlayerActions>();
+        _canOthersInteract = true;
     }
 
     protected virtual void Update()
@@ -32,21 +35,24 @@ public abstract class HighlightInteractable : MonoBehaviour
     protected abstract void Interact();
     protected abstract bool ConditionToInteract();
 
-    private void OnTriggerStay2D(Collider2D other)
+    protected virtual void OnTriggerStay2D(Collider2D other)
     {
-        if (!other.CompareTag("Player") || !ConditionToInteract()) return;
+        if (!other.CompareTag("Player") || !ConditionToInteract() || !_canOthersInteract) return;
 
         player = other.gameObject;
         SpriteRenderer.material = interactableMaterial;
         CanInteract = true;
+        _canOthersInteract = false;
     }
     
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
         
         SpriteRenderer.material = spriteDefault;
         CanInteract = false;
+        _canOthersInteract = true;
+
     }
     
 }

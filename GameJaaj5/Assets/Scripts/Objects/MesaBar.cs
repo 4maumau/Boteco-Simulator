@@ -35,6 +35,7 @@ public class MesaBar : Mesa
     //Interagir: Coloca a torre de cerveja na mesa
     protected override void Interact()
     {
+        CanInteract = false;
         SpriteRenderer.material = spriteDefault;
         SetAvailableForTower(false);
         PlayerActionsVar.SetHoldingTower(false);

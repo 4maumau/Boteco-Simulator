@@ -30,10 +30,13 @@ public class TorreDeCerveja : HighlightInteractable
     public void SetInUse(bool inUse)
     {
         _inUse = inUse;
+        if(inUse)
+            CanInteract = true;
     }
 
     public void SetFilled(bool isFull)
     {
+        SpriteRenderer.sprite = isFull ? fullTower : emptyTower;
         _isFull = isFull;
     }
 
