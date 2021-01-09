@@ -198,7 +198,8 @@ MonoBehaviour:
   caixa: {fileID: 0}
   speed: 3
   nextWaypointDistance: 1
-  fila: {fileID: 0}
+  filaEntrada: {fileID: 0}
+  filaPagamento: {fileID: 0}
   exit: {fileID: 0}
   direction: {x: 0, y: 0}
 --- !u!114 &7101148608700963411
@@ -215,6 +216,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMood: 0
   waitingTimer: 60
+  moneyPopupPrefab: {fileID: 8921972570456043969, guid: 3d88582085b0d3f40a381932db0ff5f6,
+    type: 3}
+  moodColors:
+  - {r: 0.08597367, g: 0.7924528, b: 0.09794909, a: 0}
+  - {r: 0.754717, g: 0.42629415, b: 0.15307939, a: 0}
+  - {r: 0.9716981, g: 0.43289536, b: 0.132921, a: 0}
   audioClips:
   - {fileID: 8300000, guid: b7b2aa95e8a2f2443ac366250c3e2e26, type: 3}
   - {fileID: 8300000, guid: a8c91f7059a902e4ab73d34d260b8a1d, type: 3}
