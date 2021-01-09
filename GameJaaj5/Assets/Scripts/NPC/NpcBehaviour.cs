@@ -120,7 +120,6 @@ public class NpcBehaviour : MonoBehaviour
                 if (distance < nextWaypointDistance)
                 {
                     currentWaypoint++;
-                    print("current waypoint:" + currentWaypoint);
                 }
 
             }

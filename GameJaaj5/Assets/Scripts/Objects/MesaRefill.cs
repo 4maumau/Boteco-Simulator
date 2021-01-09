@@ -9,7 +9,7 @@ public class MesaRefill : Mesa
 
     private const float FullRefilGoal = 100;
     private float _refilAmount = 0;
-    private float _refilStep = 0.1f;
+    private float _refilStep = 0.6f;
     private bool _refilling;
     private bool _isNear;
     protected override void Interact()
@@ -22,6 +22,8 @@ public class MesaRefill : Mesa
         torreDeCervejaInstancia.gameObject.transform.position = transform.position;
         torreDeCervejaInstancia.gameObject.transform.SetParent(null);
         torreDeCervejaInstancia.SetMesa(this);
+
+        torreDeCervejaInstancia.PlayRefilAnimation();
         _refilling = true;
     }
 
@@ -55,6 +57,7 @@ public class MesaRefill : Mesa
         if(_refilAmount >= FullRefilGoal)
             FinishRefilling();
 
+        torreDeCervejaInstancia.UpdateAnimation(_refilAmount);
 
     }
 

@@ -8,9 +8,7 @@ public class TorreDeCerveja : HighlightInteractable
     private bool _inUse;
     private bool _isFull;
 
-    [SerializeField]private Sprite fullTower;
-    [SerializeField]private Sprite emptyTower;
-
+   
     private TorreAnimator torreAnimator;
 
     private Mesa mesaQueMeCriou;
@@ -39,7 +37,7 @@ public class TorreDeCerveja : HighlightInteractable
 
     public void SetFilled(bool isFull)
     {
-        SpriteRenderer.sprite = isFull ? fullTower : emptyTower;
+        //SpriteRenderer.sprite = isFull ? fullTower : emptyTower;
         _isFull = isFull;
     }
 
@@ -72,5 +70,15 @@ public class TorreDeCerveja : HighlightInteractable
     public void StartDrinking()
     {
         torreAnimator.PlayDrinking();
+    }
+
+    public void PlayRefilAnimation()
+    {
+        torreAnimator.animator.Play("Refill Tree");
+    }
+
+    public void UpdateAnimation (float refilAmount)
+    {
+        torreAnimator.animator.SetFloat("RefilAmount", refilAmount);
     }
 }
