@@ -10,18 +10,23 @@ public class NpcSpawner : MonoBehaviour
     [SerializeField] private Fila fila;
     [SerializeField] private Fila filaPagamento;
     [SerializeField] private Transform caixa;
+
+    private bool _isSpawning;
     
-    
-    // Start is called before the first frame update
-    void Start()
+    public void StartSpawning()
     {
+        _isSpawning = true;
         StartCoroutine(Spawner());
+    }
+
+    public void StopSpawning()
+    {
+        _isSpawning = false;
     }
 
     IEnumerator Spawner()
     {
-
-        while (true)
+        while (_isSpawning)
         {
             yield return new WaitForSeconds(5);
             if (fila.Count() >= 4) continue;
@@ -32,8 +37,6 @@ public class NpcSpawner : MonoBehaviour
             behaviour.filaPagamento = filaPagamento;
             behaviour.caixa = caixa;
             behaviour.exit = transform;
-            
         }
-        
     }
 }

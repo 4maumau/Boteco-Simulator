@@ -9,6 +9,8 @@ public class NpcBehaviour : MonoBehaviour
 {
 
     public static event Action<List<MesaBar>> TableInicialization;
+    public static event Action CreatedClient;
+    public static event Action DeletedClient;
 
     public enum State { Waiting, WaitingForDrink, Walking, Sitting, Drinking, WaitingForPayment };
     public State currentState;
@@ -46,6 +48,8 @@ public class NpcBehaviour : MonoBehaviour
     void Start()
     {
         seeker = GetComponent<Seeker>();
+        
+        CreatedClient?.Invoke();
 
         moodManager = GetComponent<NpcMoodManager>();
         animatorScript = GetComponentInChildren<NpcAnimator>();
@@ -216,6 +220,7 @@ public class NpcBehaviour : MonoBehaviour
 
     public void SelfDestroy()
     {
+        DeletedClient?.Invoke();
         Destroy(gameObject);
     }
 }
