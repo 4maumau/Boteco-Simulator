@@ -11,15 +11,15 @@ public class GameController : MonoBehaviour
     private bool endedSpawning;
 
     [SerializeField] private NpcSpawner _spawner;
-    [SerializeField] private int tempoDeJogoSegundos = 10;
 
 
     private void Start()
     {
         CaixaRegistradora.Pagamento += Payment;
-        StartCoroutine(LevelTimer());
+        _spawner.StartSpawning();
         NpcBehaviour.CreatedClient += AddClient;
         NpcBehaviour.DeletedClient += ClientLeft;
+        NpcSpawner.EndedSpawning += EndSpawning;
     }
 
     private void Update()
@@ -50,11 +50,8 @@ public class GameController : MonoBehaviour
         moneyMade += amount;
     }
 
-    IEnumerator LevelTimer()
+    private void EndSpawning()
     {
-        _spawner.StartSpawning();
-        yield return new WaitForSeconds(tempoDeJogoSegundos);
-        _spawner.StopSpawning();
         endedSpawning = true;
     }
     

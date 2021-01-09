@@ -8071,6 +8071,7 @@ MonoBehaviour:
   fila: {fileID: 1830618217}
   filaPagamento: {fileID: 11414340}
   caixa: {fileID: 540718861}
+  spawnDelayDay: {fileID: 11400000, guid: 92cf4847448e24d43afa401b6eac1160, type: 2}
 --- !u!4 &1432442661
 Transform:
   m_ObjectHideFlags: 0
@@ -8098,7 +8099,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1432442660}
-  tempoDeJogoSegundos: 60
 --- !u!1 &1446336429
 GameObject:
   m_ObjectHideFlags: 0
