@@ -20,9 +20,13 @@ public class NpcBehaviour : MonoBehaviour
     public float speed = 5f;
     public float nextWaypointDistance = 1f;
 
+<<<<<<< HEAD
     public Fila filaEntrada;
     public Fila filaPagamento;
 
+=======
+    [SerializeField] private GameObject filaGameObject;
+>>>>>>> 1320960bb007bf5b9b4596404212711de4b4c49d
         
     private List<MesaBar> mesas;
     private MesaBar _mesaBarAtual;
@@ -32,6 +36,7 @@ public class NpcBehaviour : MonoBehaviour
     Seeker seeker;
     Path path;
     int currentWaypoint = 0;
+    bool reachedEndofPath;
 
     public Vector2 direction;
     public delegate void OnArriveDelegate();
@@ -72,29 +77,23 @@ public class NpcBehaviour : MonoBehaviour
 
     private void WaitInLine()
     {
+<<<<<<< HEAD
         var pos = filaEntrada.EnqueueClient(this);
+=======
+        var pos = filaGameObject.GetComponent<Fila>().EnqueueClient(this);
+>>>>>>> 1320960bb007bf5b9b4596404212711de4b4c49d
         path = seeker.StartPath(transform.position, pos.position, OnPathComplete);
-        StartCoroutine(GoTo(DoNothing));
-    }
-
-    private void DoNothing()
-    {
-        
-
+        StartCoroutine(GoTo(PlaySitting));
     }
 
     public void MoveInLine(Transform newTarget)
     {
         path = seeker.StartPath(transform.position, newTarget.position, OnPathComplete);
-        StartCoroutine(GoTo(DoNothing));
+        StartCoroutine(GoTo(PlaySitting));
     }
 
-    public void OffTheLine(MesaBar mesaTarget)
+    public void OffTheLine()
     {
-        _target = mesaTarget.GetComponentInChildren<Transform>();
-        _mesaBarAtual = mesaTarget;
-        _mesaBarAtual.EmptyForClients = false;
-        
         path = seeker.StartPath(transform.position, _target.position, OnPathComplete);
         StartCoroutine(GoTo(PlaySitting));
     }
@@ -109,9 +108,11 @@ public class NpcBehaviour : MonoBehaviour
             if (currentWaypoint >= path.vectorPath.Count)
             {
                 hasArrived = true;
+                reachedEndofPath = true;
             }
             else
             {
+                reachedEndofPath = false;
                 currentState = State.Walking;
             }
         }
@@ -170,7 +171,6 @@ public class NpcBehaviour : MonoBehaviour
 
     private void StartDrinking()
     {
-        _mesaBarAtual.RecebeuCerveja -= StartDrinking;
         StartCoroutine(Drinking());
     }
     
@@ -186,8 +186,6 @@ public class NpcBehaviour : MonoBehaviour
         _mesaBarAtual.FinishedDrinking();
         filaEntrada.LiberouMesa(_mesaBarAtual);
         _mesaBarAtual = null;
-        StartCoroutine(GoTo(RequestPayment));
-        
     }
 
     void RequestPayment()
