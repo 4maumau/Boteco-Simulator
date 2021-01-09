@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 265213941}
   - component: {fileID: 265213940}
   - component: {fileID: 265213942}
+  - component: {fileID: 265213943}
   m_Layer: 0
   m_Name: MesaChopp
   m_TagString: Untagged
@@ -560,6 +561,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8429327, y: 1.9067421}
   m_EdgeRadius: 0
+--- !u!114 &265213943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265213939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e2cc18571d7124392d089bf98b9139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableMaterial: {fileID: 2100000, guid: d6d98d6e22cbbc34d9005f72dace7c2b,
+    type: 2}
+  spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  player: {fileID: 1764179557}
 --- !u!1 &271728118
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +588,7 @@ GameObject:
   - component: {fileID: 271728119}
   - component: {fileID: 271728120}
   m_Layer: 9
-  m_Name: infinite
+  m_Name: saida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1088,7 +1105,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011266947, y: -0.18590426}
+  m_Offset: {x: -0.011266947, y: 0.035209417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1099,7 +1116,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.83206034, y: 0.9406915}
+  m_Size: {x: 0.83206034, y: 1.0427442}
   m_EdgeRadius: 0
 --- !u!1 &580092923
 GameObject:
@@ -3340,8 +3357,6 @@ MonoBehaviour:
     type: 2}
   spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   player: {fileID: 1764179557}
-  fullTower: {fileID: 21300000, guid: aa2c55bcb4df80d42bb508e37b6b0533, type: 3}
-  emptyTower: {fileID: 21300000, guid: a8eda49b89e948048b72f72658c7ffd0, type: 3}
 --- !u!95 &850882808
 Animator:
   serializedVersion: 3
@@ -3373,6 +3388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bd33e934f6b254a8596c98b50e97aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  test: {fileID: 21300000, guid: 98ec420d3c53f1941917b2b072f1a3ba, type: 3}
 --- !u!1 &934731073
 GameObject:
   m_ObjectHideFlags: 0
