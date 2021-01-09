@@ -20,13 +20,11 @@ public class NpcBehaviour : MonoBehaviour
     public float speed = 5f;
     public float nextWaypointDistance = 1f;
 
-<<<<<<< HEAD
     public Fila filaEntrada;
     public Fila filaPagamento;
 
-=======
-    [SerializeField] private GameObject filaGameObject;
->>>>>>> 1320960bb007bf5b9b4596404212711de4b4c49d
+
+    
         
     private List<MesaBar> mesas;
     private MesaBar _mesaBarAtual;
@@ -77,11 +75,9 @@ public class NpcBehaviour : MonoBehaviour
 
     private void WaitInLine()
     {
-<<<<<<< HEAD
+
         var pos = filaEntrada.EnqueueClient(this);
-=======
-        var pos = filaGameObject.GetComponent<Fila>().EnqueueClient(this);
->>>>>>> 1320960bb007bf5b9b4596404212711de4b4c49d
+
         path = seeker.StartPath(transform.position, pos.position, OnPathComplete);
         StartCoroutine(GoTo(PlaySitting));
     }
