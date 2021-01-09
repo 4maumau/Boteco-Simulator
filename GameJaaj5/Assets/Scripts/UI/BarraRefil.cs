@@ -19,7 +19,7 @@ public class BarraRefil : MonoBehaviour
     void Update()
     {
         barraRefil.SetActive(mesaRefill._refilling);
-        barImage.fillAmount = mesaRefill._refilAmount;
+        barImage.fillAmount = mesaRefill._refilAmount/100;
 
     }
 }
