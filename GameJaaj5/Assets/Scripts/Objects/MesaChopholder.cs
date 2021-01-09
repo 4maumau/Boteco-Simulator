@@ -12,7 +12,7 @@ public class MesaChopholder : Mesa
         SetAvailableForTower(false);
         PlayerActionsVar.SetHoldingTower(false);
         torreDeCervejaInstancia = player.GetComponentInChildren<TorreDeCerveja>();
-        torreDeCervejaInstancia.gameObject.transform.position = transform.position;
+        torreDeCervejaInstancia.gameObject.transform.position = transform.position + Vector3.up * 0.5f;
         torreDeCervejaInstancia.gameObject.transform.SetParent(null);
         torreDeCervejaInstancia.SetMesa(this);
         torreDeCervejaInstancia.SetInUse(false);
