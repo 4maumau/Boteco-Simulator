@@ -15,7 +15,6 @@ public class NpcBehaviour : MonoBehaviour
     
     
     public float smoothing = 0.5f;
-    public Transform target;
     public Transform caixa;
 
     public float speed = 5f;
@@ -23,7 +22,8 @@ public class NpcBehaviour : MonoBehaviour
     
     private List<MesaBar> mesas;
     private MesaBar _mesaBarAtual;
-    
+    private Transform _target;
+
     Seeker seeker;
     Path path;
     int currentWaypoint = 0;
@@ -43,19 +43,20 @@ public class NpcBehaviour : MonoBehaviour
 
         moodManager = GetComponent<NpcMoodManager>();
         animatorScript = GetComponentInChildren<NpcAnimator>();
-
-        path = seeker.StartPath(transform.position, target.position, OnPathComplete);
+        
         mesas = new List<MesaBar>();
         TableInicialization?.Invoke(mesas);
         ChooseTarget();
-        StartCoroutine(GoTo(target, PlaySitting));
+        
+        path = seeker.StartPath(transform.position, _target.position, OnPathComplete);
+        StartCoroutine(GoTo(_target, PlaySitting));
     }
 
     private void ChooseTarget()
     {
         foreach (var mesa in mesas.Where(mesa => mesa.EmptyForClients))
         {
-            target = mesa.GetComponentInChildren<Transform>();
+            _target = mesa.GetComponentInChildren<Transform>();
             _mesaBarAtual = mesa;
             _mesaBarAtual.EmptyForClients = false;
             break;
@@ -124,7 +125,7 @@ public class NpcBehaviour : MonoBehaviour
     private IEnumerator Sitting()
     {
         currentState = State.Sitting;
-        transform.position = target.GetChild(0).GetChild(0).position;
+        transform.position = _target.GetChild(0).GetChild(0).position;
         print(currentState);
 
         yield return new WaitForSeconds(1);
@@ -161,5 +162,6 @@ public class NpcBehaviour : MonoBehaviour
     public void FinishPayment()
     {
         print("Pagou");
+        Destroy(gameObject);
     }
 }
