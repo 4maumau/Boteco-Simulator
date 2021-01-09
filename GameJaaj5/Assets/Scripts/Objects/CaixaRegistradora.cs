@@ -29,8 +29,7 @@ public class CaixaRegistradora : HighlightInteractable
         SpriteRenderer.material = spriteDefault;
         var clienteAtendido = clientesAguardando.Dequeue();
         filaPagamento.PagamentoRealizado();
-        clienteAtendido.FinishPayment();
-        //Pagamento?.Invoke(clienteAtendido.FinishPayment(););
+        Pagamento?.Invoke(clienteAtendido.FinishPayment());
     }
 
     

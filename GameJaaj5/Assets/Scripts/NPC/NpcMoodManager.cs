@@ -76,33 +76,37 @@ public class NpcMoodManager : MonoBehaviour
         }
     }
 
-    public void MoneyPopup()
+    public float MoneyPopup()
     {
-        string moneyInt;
+        string moneyString;
+        float moneyFloat = 0;
         Color moneyTextColor;
         switch (currentMood)
         {
             case Mood.Happy:
                 moneyTextColor = Color.green;
-                moneyInt = "$25";
+                moneyFloat = 25;
+                moneyString = "$25";
                 break;
             case Mood.Normal:
                 moneyTextColor = Color.yellow;
-                moneyInt = "$20";
+                moneyFloat = 20;
+                moneyString = "$20";
                 break;
             case Mood.Mad:
                 moneyTextColor = Color.red;
-                moneyInt = "S15";
+                moneyFloat = 15;
+                moneyString = "S15";
                 break;
             default:
                 moneyTextColor = Color.white;
-                moneyInt = "sometin wrong";
+                moneyString = "sometin wrong";
                 break;
         }
         GameObject moneyPopup = Instantiate(moneyPopupPrefab, transform.position, Quaternion.identity);
         TextMesh textMesh = moneyPopup.GetComponent<TextMesh>();
         textMesh.color = moneyTextColor;
-        textMesh.text = moneyInt;
-        print("estou sendo chamado");
+        textMesh.text = moneyString;
+        return moneyFloat;
     }
 }
