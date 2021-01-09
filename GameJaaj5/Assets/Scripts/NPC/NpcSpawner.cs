@@ -11,16 +11,15 @@ public class NpcSpawner : MonoBehaviour
     [SerializeField] private Fila fila;
     [SerializeField] private Fila filaPagamento;
     [SerializeField] private Transform caixa;
-    [SerializeField] private DayData spawnDelayDay;
 
     public static event Action EndedSpawning;
     
     private List<int> _spawnDelayDays;
     
     
-    public void StartSpawning()
+    public void StartSpawning(DayData day)
     {
-        _spawnDelayDays = spawnDelayDay.delayBetweenSpawn;
+        _spawnDelayDays = day.delayBetweenSpawn;
         StartCoroutine(Spawner());
     }
 

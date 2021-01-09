@@ -9,17 +9,19 @@ public class GameController : MonoBehaviour
     private int clientsInBar = 0;
     private float debtToPay;
     private bool endedSpawning;
-
+    private int currentDay = 0;
+    
     [SerializeField] private NpcSpawner _spawner;
+    [SerializeField] private List<DayData> levels;
 
 
     private void Start()
     {
         CaixaRegistradora.Pagamento += Payment;
-        _spawner.StartSpawning();
         NpcBehaviour.CreatedClient += AddClient;
         NpcBehaviour.DeletedClient += ClientLeft;
         NpcSpawner.EndedSpawning += EndSpawning;
+        StartNewDay(currentDay++);
     }
 
     private void Update()
@@ -38,6 +40,12 @@ public class GameController : MonoBehaviour
     private void AddClient()
     {
         clientsInBar++;
+    }
+
+    public void StartNewDay(int day)
+    {
+        moneyMade = 0;
+        _spawner.StartSpawning(levels[day]);
     }
 
     private void ClientLeft()
