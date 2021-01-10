@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -644,7 +644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &222026103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3888,10 +3888,6 @@ MonoBehaviour:
   waitingTimer: 60
   moneyPopupPrefab: {fileID: 8921972570456043969, guid: 3d88582085b0d3f40a381932db0ff5f6,
     type: 3}
-  moodColors:
-  - {r: 0.24313726, g: 0.5372549, b: 0.28235295, a: 0}
-  - {r: 0.96862745, g: 0.4627451, b: 0.13333334, a: 0}
-  - {r: 0.89411765, g: 0.23137255, b: 0.26666668, a: 0}
   audioClips:
   - {fileID: 8300000, guid: b7b2aa95e8a2f2443ac366250c3e2e26, type: 3}
   - {fileID: 8300000, guid: a8c91f7059a902e4ab73d34d260b8a1d, type: 3}
@@ -4039,7 +4035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &835847032
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4376,6 +4372,8 @@ MonoBehaviour:
     type: 2}
   spriteDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   player: {fileID: 1764179557}
+  _refilAmount: 0
+  _refilling: 0
 --- !u!1 &1080012872
 GameObject:
   m_ObjectHideFlags: 0

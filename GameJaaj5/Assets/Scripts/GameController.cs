@@ -2,17 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    private float moneyMade;
+    public float moneyMade;
+    public float debtToPay;
+    
     private int clientsInBar = 0;
-    private float debtToPay;
     private bool endedSpawning;
-    private int currentDay = 0;
+    public int currentDay = 0;
     
     [SerializeField] private NpcSpawner _spawner;
     [SerializeField] private List<DayData> levels;
+
+    [SerializeField] private GameObject panelDay;
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private GameObject gameWin;
 
 
     private void Start()
@@ -21,19 +27,24 @@ public class GameController : MonoBehaviour
         NpcBehaviour.CreatedClient += AddClient;
         NpcBehaviour.DeletedClient += ClientLeft;
         NpcSpawner.EndedSpawning += EndSpawning;
-        StartNewDay(currentDay++);
+        StartNewDay();
     }
 
     private void Update()
     {
         if (endedSpawning && clientsInBar <= 0)
         {
-            EndGame();
+            EndDay();
         }
     }
 
-    private void EndGame()
+    private void EndDay()
     {
+        
+        
+        
+            panelDay.SetActive(true);
+            print("dia terminou");
         
     }
 
@@ -42,10 +53,27 @@ public class GameController : MonoBehaviour
         clientsInBar++;
     }
 
-    public void StartNewDay(int day)
+    public void StartNewDay()
     {
-        moneyMade = 0;
-        _spawner.StartSpawning(levels[day]);
+        debtToPay -= moneyMade;
+        if (currentDay == levels.Count)
+        {
+            if (debtToPay > 0)
+            {
+                gameOver.SetActive(true);
+            }
+            else
+            {
+                gameWin.SetActive(true);
+            }
+        }
+        else
+        {
+            endedSpawning = false;
+            moneyMade = 0;
+            panelDay.SetActive(false);
+            _spawner.StartSpawning(levels[currentDay++]);
+        }
     }
 
     private void ClientLeft()
@@ -61,6 +89,11 @@ public class GameController : MonoBehaviour
     private void EndSpawning()
     {
         endedSpawning = true;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     
