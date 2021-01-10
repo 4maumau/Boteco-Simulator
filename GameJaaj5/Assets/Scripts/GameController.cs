@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public int currentDay = 0;
     
     [SerializeField] private NpcSpawner _spawner;
-    [SerializeField] private List<DayData> levels;
+    public List<DayData> levels;
 
     [SerializeField] private GameObject panelDay;
     [SerializeField] private GameObject gameOver;
