@@ -6,7 +6,7 @@ using UnityEngine;
 public class TorreDeCerveja : HighlightInteractable
 {
     private bool _inUse;
-    private bool _isFull;
+    [SerializeField] private bool _isFull;
 
    
     private TorreAnimator torreAnimator;
@@ -17,7 +17,6 @@ public class TorreDeCerveja : HighlightInteractable
     {
         base.Start();
         _inUse = false;
-        _isFull = true;
         mesaQueMeCriou = null;
         GetComponent<BoxCollider2D>().enabled = true;
         torreAnimator = GetComponent<TorreAnimator>();
