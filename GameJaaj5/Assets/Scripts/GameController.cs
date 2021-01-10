@@ -55,23 +55,25 @@ public class GameController : MonoBehaviour
 
     public void StartNewDay()
     {
+        panelDay.SetActive(false);
         debtToPay -= moneyMade;
         if (currentDay == levels.Count)
         {
             if (debtToPay > 0)
             {
                 gameOver.SetActive(true);
+                gameOver.GetComponent<Animator>().Play("Transition");
             }
             else
             {
                 gameWin.SetActive(true);
+                gameWin.GetComponent<Animator>().Play("GameWinTransition");
             }
         }
         else
         {
             endedSpawning = false;
             moneyMade = 0;
-            panelDay.SetActive(false);
             _spawner.StartSpawning(levels[currentDay++]);
         }
     }

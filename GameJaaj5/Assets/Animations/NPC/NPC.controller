@@ -307,33 +307,9 @@ BlendTree:
   m_Name: Sitting
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 8ea1a63f89f0d8246abb751b44450990, type: 2}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 1}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: FaceX
-    m_Mirror: 0
-  - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 2bff24b8554460c42bb1f2d258912c2c, type: 2}
-    m_Threshold: 0.33333334
+    m_Threshold: 0
     m_Position: {x: 1, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: FaceX
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 7d7c15630863a9f4db951ed7f6f9b028, type: 2}
-    m_Threshold: 0.6666667
-    m_Position: {x: 0, y: -1}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: FaceX
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: b4740a44462059247bf58ebefa44c949, type: 2}
-    m_Threshold: 1
-    m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: FaceX
